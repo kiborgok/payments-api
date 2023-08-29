@@ -19,7 +19,6 @@ import java.util.List;
 @Tag(name = "Account Controller")
 public class AccountController {
     private final ApplicationService service;
-    private final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     public AccountController(ApplicationService service) {
         this.service = service;
@@ -27,7 +26,6 @@ public class AccountController {
 
     @PostMapping
     ResponseEntity<?> createAccount(@RequestBody CustomerCreateAccountRequest accountRequest){
-        logger.info("Create customer account request :: {}", accountRequest);
         return service.createCustomerWithAccount(accountRequest);
     }
 
