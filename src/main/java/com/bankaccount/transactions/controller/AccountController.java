@@ -7,6 +7,8 @@ import com.bankaccount.transactions.dto.response.AccountDto;
 import com.bankaccount.transactions.dto.response.BalanceResponse;
 import com.bankaccount.transactions.service.ApplicationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @Tag(name = "Account Controller")
 public class AccountController {
     private final ApplicationService service;
+    private final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     public AccountController(ApplicationService service) {
         this.service = service;
@@ -24,6 +27,7 @@ public class AccountController {
 
     @PostMapping
     ResponseEntity<?> createAccount(@RequestBody CustomerCreateAccountRequest accountRequest){
+        logger.info("Create customer account request :: {}", accountRequest);
         return service.createCustomerWithAccount(accountRequest);
     }
 
